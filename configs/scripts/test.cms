@@ -1,4 +1,0 @@
-﻿#INCLUDE "subs.cms"
-//hset(wndfind("TBAPb MPA3b"),1)
-halt
-WAIT(100000000000)

@@ -1,5 +1,5 @@
 ﻿#INCLUDE "imageSubs.cms"
-hset(wndfind("TBAPb MPA3b"),1)
+hset(wndfind("cl0wn ZRazorIII"),1)
 initImageConstants()
 
 getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Реактор 100 М1","первый слот трюма","Cargo")
@@ -9,5 +9,8 @@ getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Чип С�
 getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Чип ОГНЕСТРЕЛЬНОЕ 30","первый слот трюма","Cargo")
 getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Чип поле 60","первый слот трюма","Cargo")
 getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Чип броня 60","первый слот трюма","Cargo")
+getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Чип ТРЮМ 25","первый слот трюма","Cargo")
+getItemImage($cargoSlot1X1,$cargoSlot1Y1,$cargoSlot1X2,$cargoSlot1Y2,"Трюм 60","первый слот трюма","Cargo")
+//getItemImage($digX1,$digY1,$digX2,$digY2,"ДОБЫЧА","НА КУЧУ","")
 
 halt
