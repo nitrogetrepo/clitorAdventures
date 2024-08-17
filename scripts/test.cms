@@ -1,0 +1,6 @@
+﻿
+#INCLUDE "imageSubs.cms"
+hset(wndfind("cl0wn arima"),1)
+
+halt
+WAIT(100000000000)

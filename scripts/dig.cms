@@ -1,0 +1,10 @@
+﻿#INCLUDE "subs.cms"
+hset(wndfind("TBAPB Digger"),1)
+init()
+while(1)
+    getscreen
+    dig()
+    WAITMS(50)
+END_CYC
+halt
+WAIT(100000000000)

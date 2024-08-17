@@ -1,0 +1,452 @@
+﻿SUB(init)
+    $cFD = "../configs/constants.ini"
+    $delayGetscreen = INIREAD($cFD,"getscreen","delay")
+    $delayEquip = INIREAD($cFD,"equip","delay")
+    $delayDequip = INIREAD($cFD,"dequip","delay")
+    $delayLclick = INIREAD($cFD,"lclick","delay")
+    $delayKeyDown = INIREAD($cFD,"keydown","delay")
+    $delayCycle = INIREAD($cFD,"cycle","delay")
+    $delayMove = INIREAD($cFD,"move","delay")
+    $delaykeyPress = INIREAD($cFD,"keyPress","delay")
+
+    $reloadFullReloadLX = INIREAD($cFD,"fullReloadLX","reloadPixels")
+    $reloadFullReloadLY = INIREAD($cFD,"fullReloadLY","reloadPixels")
+    $reloadFullReloadRX = INIREAD($cFD,"fullReloadRX","reloadPixels")
+    $reloadFullReloadRY = INIREAD($cFD,"fullReloadRY","reloadPixels")
+
+    $reloadSquareL5X = INIREAD($cFD,"squareL5X","reloadPixels")
+    $reloadSquareL5Y = INIREAD($cFD,"squareL5Y","reloadPixels")
+    $reloadSquareR5X = INIREAD($cFD,"squareR5X","reloadPixels")
+    $reloadSquareR5Y = INIREAD($cFD,"squareR5Y","reloadPixels")
+
+    $reloadSquareL3X = INIREAD($cFD,"squareL3X","reloadPixels")
+    $reloadSquareL3Y = INIREAD($cFD,"squareL3Y","reloadPixels")
+    $reloadSquareR3X = INIREAD($cFD,"squareR3X","reloadPixels")
+    $reloadSquareR3Y = INIREAD($cFD,"squareR3Y","reloadPixels")
+
+    $reloadSquareL7X = INIREAD($cFD,"squareL7X","reloadPixels")
+    $reloadSquareL7Y = INIREAD($cFD,"squareL7Y","reloadPixels")
+    $reloadSquareR7X = INIREAD($cFD,"squareR7X","reloadPixels")
+    $reloadSquareR7Y = INIREAD($cFD,"squareR7Y","reloadPixels")
+
+    $reloadWhiteBarPixel = INIREAD($cFD,"whiteBarPixel","reloadPixels")
+    $reloadWhiteSquarePixel = INIREAD($cFD,"whiteSquarePixel","reloadPixels")
+
+    $cargoX1 = INIREAD($cFD,"X1","cargo")
+    $cargoY1 = INIREAD($cFD,"Y1","cargo")
+    $cargoX2 = INIREAD($cFD,"X2","cargo")
+    $cargoY2 = INIREAD($cFD,"Y2","cargo")
+    $cargoScrollDownX = INIREAD($cFD,"scrollDownX","cargo")
+    $cargoScrollDownY = INIREAD($cFD,"scrollDownY","cargo")
+    $cargoScrollUpX = INIREAD($cFD,"scrollUpX","cargo")
+    $cargoScrollUpY = INIREAD($cFD,"scrollUpY","cargo")
+
+    $chip1X = INIREAD($cFD,"X1","chips")
+    $chip1Y = INIREAD($cFD,"Y1","chips")
+    $chip2X = INIREAD($cFD,"X2","chips")
+    $chip2Y = INIREAD($cFD,"Y2","chips")
+    $chip3X = INIREAD($cFD,"X3","chips")
+    $chip3Y = INIREAD($cFD,"Y3","chips")
+    $chip4X = INIREAD($cFD,"X4","chips")
+    $chip4Y = INIREAD($cFD,"Y4","chips")
+
+    $addittionalSlots1X = INIREAD($cFD,"X1","additionalSlots")
+    $addittionalSlots1Y = INIREAD($cFD,"Y1","additionalSlots")
+    $addittionalSlots2X = INIREAD($cFD,"X2","additionalSlots")
+    $addittionalSlots2Y = INIREAD($cFD,"Y2","additionalSlots")
+
+    $keySixGunShootOut = INIREAD($cFD,"sixGunShootOut","keys")
+    $keyOneTwo = INIREAD($cFD,"oneTwo","keys")
+    $keySpeed = INIREAD($cFD,"speed","keys")
+    $keyFire = INIREAD($cFD,"fire","keys")
+    $keyReactors = INIREAD($cFD,"reactors","keys")
+    $keyDefence = INIREAD($cFD,"defence","keys")
+    $swapChipsKey = INIREAD($cFD,"swapChips","keys") 
+    $plugArmourKey = INIREAD($cFD,"plugArmour","keys") 
+    $plugShieldKey = INIREAD($cFD,"plugShield","keys")
+    $ammo = INIREAD($cFD,"ammo","keys")
+
+    $digX1 = INIREAD($CFD,"digX1","pictures")
+    $digY1 = INIREAD($CFD,"digY1","pictures")
+    $digX2 = INIREAD($CFD,"digX2","pictures")
+    $digY2 = INIREAD($CFD,"digY2","pictures")
+    $sixGunShootOutFlag = 1		
+    $oneTwoFlag = 0
+END_SUB
+ 
+SUB(sixGunShootOut,$gunsNumber)
+    IF( (PXL($reloadFullReloadLX,$reloadFullReloadLY) == $reloadWhiteBarPixel) OR (PXL($reloadFullReloadRX,$reloadFullReloadRY)== $reloadWhiteBarPixel) )
+        WAITMS(100)
+    ELSE
+        IF( (PXL($reloadSquareL5X,$reloadSquareL5Y) == $reloadWhiteSquarePixel) OR (PXL($reloadSquareR5X,$reloadSquareR5Y) == $reloadWhiteSquarePixel) )
+            KEYPRESS(#5)
+            WAITMS(RND(1000,1100))
+        ELSE
+            IF( (PXL($reloadSquareL3X,$reloadSquareL3Y) == $reloadWhiteSquarePixel) OR (PXL($reloadSquareR3X,$reloadSquareR3Y)== $reloadWhiteSquarePixel) )
+                KEYPRESS(#3)
+                WAITMS(RND(1000,1100))
+            ELSE
+                IF($gunsNumber==8)
+                    IF( (PXL($reloadSquareL7X,$reloadSquareL7Y) == $reloadWhiteSquarePixel) OR (PXL($reloadSquareR7X,$reloadSquareR7Y)== $reloadWhiteSquarePixel) )
+                        KEYPRESS(#7)
+                        WAITMS(RND(1000,1100))
+                    END_IF
+                END_IF
+            END_IF
+        END_IF    
+    END_IF
+END_SUB
+
+SUB(oneTwo,$delay)
+
+    KEYPRESS(#1)
+    WAITMS($delaykeyPress)
+    KEYPRESS(#2)
+    WAITMS($delaykeyPress)
+
+END_SUB
+
+SUB(removeItems,$x1,$y1,$x2,$y2,$item,$delay)
+    INIWRITE("../configs/variables.ini","removeDelay",$delay)
+    MOVE(RND(0,10),RND(0,10))
+    WAITMS(50)
+    GETSCREEN($x1,$y1,$x2,$y2)
+
+    $pict = STRCONCAT("../images/",$item,".bmp")
+    scanpicture($items,$x1,$y1,$x2,$y2,$pict,-1,95)
+    
+    WHILE(arrsize($items) > 0)
+        $y = arrpop($items)
+        $x = arrpop($items)
+        RCLICK($x,$y)
+        WAITMS(INIREAD("../configs/variables.ini","removeDelay"))
+        INC($itemsRemoved,1)
+    END_CYC
+    
+
+END_SUB
+
+SUB(findAndClick)
+
+    MOVE(RND(0,10),RND(0,10))
+    WAITMS($delayMove)
+    GETSCREEN($cargoX1,$cargoY1,$cargoX2,$cargoY2)
+    $imageName = INIREAD("../configs/images.ini","image")
+    $pict = STRCONCAT("../images/",$imageName,"Cargo.bmp")
+    
+    IF_PICTURE_IN($cargoX1,$cargoY1,$cargoX2,$cargoY2,$pict,-1,95)
+        RCLICK($_return1,$_return2)
+        INC($foundItems,1)
+        INC($overflow,-1)
+    ELSE
+        LCLICK($cargoScrollDownX,$cargoScrollDownY)
+        INC($overflow,1)
+    END_IF
+    
+END_SUB
+
+SUB(equipItems,$item,$itemAmount)
+
+    INIWRITE("../configs/images.ini","image",$item)
+    FOR($i=0,$i<6)
+        LCLICK($cargoScrollUpX,$cargoScrollUpY)
+        WAITMS($delayLclick)
+    END_CYC
+    $foundItems = 0
+    $overflow = 0
+    WHILE($foundItems<$itemAmount)
+        
+        FOR($i=0,$i<$itemAmount)
+        
+            IF($foundItems<$itemAmount)
+
+                findAndClick()
+                IF(($overflow>10) | ($overflow<-10))
+                    $foundItems = 999
+                END_IF
+                WAITMS($delayEquip)
+                
+            END_IF
+
+        END_CYC
+        
+    END_CYC
+    $foundItems = 0
+    $overflow = 0
+    FOR($i=0,$i<6)
+        LCLICK($cargoScrollUpX,$cargoScrollUpY)
+        WAITMS($delayLclick)
+    END_CYC
+    $itemsRemoved = 0
+END_SUB
+
+SUB(findItem,$num)
+
+    MOVE(RND(0,10),RND(0,10))
+    WAITMS($delayMove)
+    GETSCREEN($cargoX1,$cargoY1,$cargoX2,$cargoY2)
+    $imageCFG = "../configs/images.ini"
+    $imageNum = STRCONCAT("image",$num)
+    $imageName = INIREAD("../configs/images.ini",$imageNum)
+    $pict = STRCONCAT("../images/",$imageName,"Cargo.bmp")
+    IF_PICTURE_IN($cargoX1,$cargoY1,$cargoX2,$cargoY2,$pict,-1,95)
+        RCLICK($_return1,$_return2)
+        $tempStr = STRCONCAT("foundItem",$num)
+        $tempFound = INIREAD($imageCFG,$tempStr) + 1
+        INIWRITE($imageCFG,$tempStr,$tempFound)
+        INC($overflow,-1)
+        WAITMS($delayEquip)
+    END_IF
+
+
+END_SUB
+
+SUB(equipTwoItems,$item1,$itemAmount1,$item2,$itemAmount2)
+    INIWRITE("../configs/images.ini","image1",$item1)
+    INIWRITE("../configs/images.ini","image2",$item2)
+    FOR($i=0,$i<6)
+        LCLICK($cargoScrollUpX,$cargoScrollUpY)
+        WAITMS($delayLclick)
+    END_CYC
+
+
+    INIWRITE("../configs/images.ini","foundItem1","0")
+    INIWRITE("../configs/images.ini","foundItem2","0")
+    $overflow = 0
+    $foundItem1 = INIREAD("../configs/images.ini","foundItem1")
+    $foundItem2 = INIREAD("../configs/images.ini","foundItem2")
+    WHILE(($foundItem1<$itemAmount1)|($foundItem2<$itemAmount2))
+            
+
+
+        FOR($i=0,$i<$itemAmount1)
+        
+            IF($foundItem1<$itemAmount1)
+                findItem("1")
+                
+            END_IF
+                    
+            IF(($overflow>10) | ($overflow<-10))
+                $foundItem1= 999
+                $foundItem2= 999
+            END_IF
+
+        END_CYC
+
+        FOR($i=0,$i<$itemAmount2)
+
+            IF($foundItem2<$itemAmount2)
+                findItem("2")
+                
+            END_IF
+
+
+            IF(($overflow>10) | ($overflow<-10))
+                $foundItem1= 999
+                $foundItem2= 999
+            END_IF
+        
+        END_CYC
+        $foundItem1 = INIREAD("../configs/images.ini","foundItem1")
+        $foundItem2 = INIREAD("../configs/images.ini","foundItem2")
+        LCLICK($cargoScrollDownX,$cargoScrollDownY)
+        INC($overflow,1)
+
+    END_CYC
+
+    INIWRITE("../configs/images.ini","foundItem1","0")
+    INIWRITE("../configs/images.ini","foundItem2","0")
+    $overflow = 0
+    FOR($i=0,$i<6)
+        LCLICK($cargoScrollUpX,$cargoScrollUpY)
+        WAITMS($delayLclick)
+    END_CYC
+
+END_SUB
+
+SUB(dequipChips)
+    RCLICK($chip1X,$chip1Y)
+    WAITMS($delayDequip)
+    RCLICK($chip2X,$chip2Y)
+    WAITMS($delayDequip)
+    RCLICK($chip3X,$chip3Y)
+    WAITMS($delayDequip)
+    RCLICK($chip4X,$chip4Y)
+END_SUB
+
+SUB(dequipAdditionalSlots)
+    RCLICK($addittionalSlots1X,$addittionalSlots1Y)
+    WAITMS($delayDequip) 
+    RCLICK($addittionalSlots2X,$addittionalSlots2Y)
+    WAITMS($delayDequip) 
+END_SUB
+
+SUB(SPEED)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    dequipChips()
+    equipItems("Чип СКОРОСТЬ",4)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(SPEEDTOK)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    RCLICK($chip1X,$chip1Y)
+    WAITMS($delayDequip)
+    RCLICK($chip2X,$chip2Y)
+    WAITMS($delayDequip)
+    RCLICK($chip3X,$chip3Y)
+    equipItems("Чип СКОРОСТЬ",3)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(FIRECHIP)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    dequipChips()
+    equipItems("Чип ОГНЕСТРЕЛЬНОЕ 30",4)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(FIRECHIPTOK)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    RCLICK($chip1X,$chip1Y)
+    WAITMS($delayDequip)
+    RCLICK($chip2X,$chip2Y)
+    WAITMS($delayDequip)
+    RCLICK($chip3X,$chip3Y)
+    equipItems("Чип ОГНЕСТРЕЛЬНОЕ 30",3)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(equipReactor)
+
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    dequipAdditionalSlots()
+    equipItems("Реактор 100 М1",2)
+    KEYPRESS(#TAB)
+
+END_SUB
+
+SUB(equipDefence)
+
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    dequipAdditionalSlots()
+    equipTwoItems("Защитное поле 100 М1",1,"Броня 100 М1",1)
+    KEYPRESS(#TAB)
+
+END_SUB
+
+SUB(swapChips)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    dequipChips()
+    equipTwoItems("Чип броня 60",2,"Чип поле 60",2)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(plugArmour)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    RCLICK(880,461)
+    equipItems("Броня 100 М1",1)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(plugCargo1)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    RCLICK(880,461)
+    equipItems("Трюм 60",1)
+    KEYPRESS(#TAB)
+END_SUB 
+
+SUB(plugShield)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    RCLICK(865,519)
+    equipItems("Защитное поле 100 М1",1)
+    KEYPRESS(#TAB)
+END_SUB
+
+SUB(plugCargo2)
+    KEYPRESS(#TAB)
+    WAITMS($delayGetscreen)
+    RCLICK(865,519)
+    equipItems("Трюм 60",1)
+    KEYPRESS(#TAB)
+END_SUB 
+
+SUB(dig)
+
+    $digImage = STRCONCAT("../images/","ДОБЫЧА",".bmp")
+    IF_PICTURE_IN($digX1,$digY1,$digX2,$digY2,$digImage)
+        KEYPRESS(#E)
+        WAITMS(300)
+    END_IF
+    
+
+END_SUB
+
+
+SUB(pressQW)
+
+    FOR($z=0,$z<4)
+        KEYPRESS(#Q)
+        WAITMS(150)
+    END_CYC
+    FOR($z=0,$z<4)
+        KEYPRESS(#W)
+        WAITMS(150)
+    END_CYC
+
+END_SUB
+
+SUB(changeAmmo)
+    KEYPRESS(#TAB)
+
+    RCLICK(455,286)  // 3752272
+    WAITMS(50)
+    RCLICK(450,206)  // 4473629
+    WAITMS(50)
+    RCLICK(450,146)  // 4473629
+    WAITMS(50)
+    RCLICK(870,155)  // 4473629
+    WAITMS(50)
+    RCLICK(885,230)  // 1318400
+    WAITMS(50)
+    RCLICK(880,293)  // 1318400
+    WAITMS(50)
+    RCLICK(455,316)  // 4473629
+    WAITMS(50)
+    RCLICK(870,331)  // 4473629
+
+    KEYPRESS(#TAB)
+
+    pressQW()
+    WAITMS(1000)
+
+    KEYPRESS(#3)
+    pressQW()
+    WAITMS(1000)
+
+    KEYPRESS(#5)
+    pressQW()
+    WAITMS(1000)
+
+    KEYPRESS(#7)
+    
+    KEYPRESS(#Q)
+    WAITMS(150)
+    FOR($z=0,$z<4)
+        KEYPRESS(#W)
+        WAITMS(150)
+    END_CYC
+    WAITMS(1000)
+
+    
+END_SUB
